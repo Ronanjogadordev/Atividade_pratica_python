@@ -1,0 +1,642 @@
+def analisar_numeros():
+    numeros = []
+    for i in range(15):
+        num = int(input(f"Digite o {i+1}º número inteiro: "))
+        numeros.append(num)
+
+    soma = 0
+    maior = numeros[0]
+    menor = numeros[0]
+    pares = 0
+    impares = 0
+
+    for num in numeros:
+        soma += num
+        if num > maior:
+            maior = num
+        if num < menor:
+            menor = num
+        if num % 2 == 0:
+            pares += 1
+        else:
+            impares += 1
+
+    media = soma / len(numeros)
+
+    print("\n--- Resultados ---")
+    print("Lista completa:", numeros)
+    print("Soma dos elementos:", soma)
+    print("Média:", media)
+    print("Maior valor:", maior)
+    print("Menor valor:", menor)
+    print("Quantidade de pares:", pares)
+    print("Quantidade de ímpares:", impares)
+
+
+
+def filtrar_unicos():
+    lista_original = []
+    for i in range(12):
+        num = int(input(f"Digite o {i+1}º número: "))
+        lista_original.append(num)
+
+    unicos = []
+    for num in lista_original:
+        contador = 0
+        for item in lista_original:
+            if item == num:
+                contador += 1
+        if contador == 1:
+            unicos.append(num)
+
+    print("\nLista original:", lista_original)
+    print("Valores que aparecem uma única vez:", unicos)
+
+filtrar_unicos()
+
+def cadastrar_produtos():
+    nomes = []
+    precos = []
+
+    for i in range(8):
+        nome = input(f"Nome do produto {i+1}: ")
+        preco = float(input(f"Preço do produto {i+1}: R$ "))
+        nomes.append(nome)
+        precos.append(preco)
+
+    soma = 0
+    idx_caro = 0
+    idx_barato = 0
+
+    for i in range(len(precos)):
+        soma += precos[i]
+        if precos[i] > precos[idx_caro]:
+            idx_caro = i
+        if precos[i] < precos[idx_barato]:
+            idx_barato = i
+
+    media = soma / len(precos)
+    acima_da_media = 0
+
+    for preco in precos:
+        if preco > media:
+            acima_da_media += 1
+
+    print("\n--- Análise de Produtos ---")
+    print(f"Produto mais caro: {nomes[idx_caro]} (R$ {precos[idx_caro]:.2f})")
+    print(f"Produto mais barato: {nomes[idx_barato]} (R$ {precos[idx_barato]:.2f})")
+    print(f"Média dos preços: R$ {media:.2f}")
+    print(f"Produtos acima da média: {acima_da_media}")
+
+cadastrar_produtos()
+
+def jogo_adivinhacao():
+    numero_secreto = 42
+    tentativas = 0
+    acertou = False
+
+    print("--- Jogo da Adivinhação ---")
+    while not acertou:
+        chute = int(input("Digite um número: "))
+        tentativas += 1
+
+        if chute == numero_secreto:
+            acertou = True
+            print("Parabéns! Você acertou!")
+        elif chute > numero_secreto:
+            print("O número secreto é menor.")
+        else:
+            print("O número secreto é maior.")
+
+    print(f"Total de tentativas: {tentativas}")
+
+jogo_adivinhacao()
+
+def analisar_texto():
+    frase = input("Digite uma frase: ")
+    
+    total_caracteres = len(frase)
+    espacos = 0
+    vogais = 0
+    consoantes = 0
+    vogais_ref = "aeiouAEIOUáéíóúÁÉÍÓÚãõÃÕâêôÂÊÔ"
+
+    for char in frase:
+        if char == " ":
+            espacos += 1
+        elif char in vogais_ref:
+            vogais += 1
+        elif char.isalpha():
+            consoantes += 1
+
+    frase_invertida = ""
+    for i in range(len(frase) - 1, -1, -1):
+        frase_invertida += frase[i]
+
+    print("\n--- Resultados ---")
+    print("Quantidade de caracteres:", total_caracteres)
+    print("Quantidade de espaços:", espacos)
+    print("Quantidade de vogais:", vogais)
+    print("Quantidade de consoantes:", consoantes)
+    print("Frase invertida:", frase_invertida)
+
+analisar_texto()
+
+def matriz_3x3():
+    matriz = []
+    print("Preencha a matriz 3x3:")
+    for i in range(3):
+        linha = []
+        for j in range(3):
+            val = int(input(f"Elemento [{i}][{j}]: "))
+            linha.append(val)
+        matriz.append(linha)
+
+    soma_total = 0
+    maior = matriz[0][0]
+    menor = matriz[0][0]
+    soma_diag = 0
+
+    print("\n--- Matriz Completa ---")
+    for i in range(3):
+        for j in range(3):
+            val = matriz[i][j]
+            print(f"{val:4d}", end="")
+            soma_total += val
+            
+            if val > maior:
+                maior = val
+            if val < menor:
+                menor = val
+            if i == j:
+                soma_diag += val
+        print()
+
+    print("\nSoma de todos os elementos:", soma_total)
+    print("Maior valor:", maior)
+    print("Menor valor:", menor)
+    print("Soma da diagonal principal:", soma_diag)
+
+matriz_3x3()
+
+def calcular_media_aluno(n1, n2):
+    return (n1 + n2) / 2
+
+def sistema_notas():
+    nomes = []
+    medias = []
+
+    for i in range(6):
+        nome = input(f"Nome do aluno {i+1}: ")
+        n1 = float(input(f"Nota 1 de {nome}: "))
+        n2 = float(input(f"Nota 2 de {nome}: "))
+        media = calcular_media_aluno(n1, n2)
+        
+        nomes.append(nome)
+        medias.append(media)
+
+    maior_m = medias[0]
+    menor_m = medias[0]
+    soma_m = 0
+    aprovados = 0
+    reprovados = 0
+
+    for m in medias:
+        soma_m += m
+        if m > maior_m:
+            maior_m = m
+        if m < menor_m:
+            menor_m = m
+        if m >= 7.0:
+            aprovados += 1
+        else:
+            reprovados += 1
+
+    media_geral = soma_m / len(medias)
+
+    print("\n--- Resumo da Turma ---")
+    print(f"Maior média: {maior_m:.2f}")
+    print(f"Menor média: {menor_m:.2f}")
+    print(f"Aprovados: {aprovados}")
+    print(f"Reprovados: {reprovados}")
+    print(f"Média geral da turma: {media_geral:.2f}")
+
+sistema_notas()
+
+def ordenacao_manual():
+    numeros = []
+    for i in range(10):
+        numeros.append(int(input(f"Digite o {i+1}º número: ")))
+
+    original = list(numeros)
+
+    # Bubble Sort manual
+    n = len(numeros)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if numeros[j] > numeros[j + 1]:
+                numeros[j], numeros[j + 1] = numeros[j + 1], numeros[j]
+
+    print("\nLista original:", original)
+    print("Lista ordenada:", numeros)
+
+ordenacao_manual()
+
+def frequencia_valores():
+    numeros = []
+    for i in range(15):
+        numeros.append(int(input(f"Digite o {i+1}º número: ")))
+
+    contados = []
+    print("\n--- Frequência ---")
+    for num in numeros:
+        if num not in contados:
+            qtd = 0
+            for item in numeros:
+                if item == num:
+                    qtd += 1
+            print(f"{num} apareceu {qtd} vez(es)")
+            contados.append(num)
+
+frequencia_valores()
+
+def caixa_eletronico():
+    valor = int(input("Digite o valor para saque: R$ "))
+    notas = [100, 50, 20, 10, 5, 2, 1]
+
+    print(f"\nValor sacado: R$ {valor}")
+    for nota in notas:
+        qtd_notas = valor // nota
+        if qtd_notas > 0:
+            print(f"{qtd_notas} nota(s) de R$ {nota}")
+            valor %= nota
+
+caixa_eletronico()
+
+def menu_completo():
+    lista = []
+    opcao = 0
+
+    while opcao != 8:
+        print("\n--- MENU ---")
+        print("1. Adicionar número\n2. Remover número\n3. Mostrar lista")
+        print("4. Mostrar maior\n5. Mostrar menor\n6. Mostrar média")
+        print("7. Pesquisar número\n8. Encerrar")
+        opcao = int(input("Escolha uma opção: "))
+
+        if opcao == 1:
+            lista.append(int(input("Digite um número para adicionar: ")))
+        elif opcao == 2:
+            num = int(input("Digite o número para remover: "))
+            if num in lista:
+                lista.remove(num)
+                print("Removido com sucesso.")
+            else:
+                print("Número não encontrado.")
+        elif opcao == 3:
+            print("Lista:", lista)
+        elif opcao == 4:
+            if lista:
+                m = lista[0]
+                for x in lista:
+                    if x > m: m = x
+                print("Maior:", m)
+            else: print("Lista vazia.")
+        elif opcao == 5:
+            if lista:
+                m = lista[0]
+                for x in lista:
+                    if x < m: m = x
+                print("Menor:", m)
+            else: print("Lista vazia.")
+        elif opcao == 6:
+            if lista:
+                soma = 0
+                for x in lista: soma += x
+                print("Média:", soma / len(lista))
+            else: print("Lista vazia.")
+        elif opcao == 7:
+            num = int(input("Número a pesquisar: "))
+            print("Encontrado!" if num in lista else "Não encontrado.")
+
+menu_completo()
+
+def maior(lista):
+    m = lista[0]
+    for item in lista:
+        if item > m: m = item
+    return m
+
+def menor(lista):
+    m = lista[0]
+    for item in lista:
+        if item < m: m = item
+    return m
+
+def soma(lista):
+    s = 0
+    for item in lista: s += item
+    return s
+
+def media(lista):
+    return soma(lista) / len(lista)
+
+def programa_principal():
+    numeros = []
+    qtd = int(input("Quantos números deseja inserir? "))
+    for i in range(qtd):
+        numeros.append(float(input(f"Digite o {i+1}º número: ")))
+
+    print(f"Maior: {maior(numeros)}")
+    print(f"Menor: {menor(numeros)}")
+    print(f"Soma: {soma(numeros)}")
+    print(f"Média: {media(numeros):.2f}")
+
+programa_principal()
+
+def cadastro_funcionarios():
+    nomes = []
+    salarios = []
+
+    for i in range(5):
+        nomes.append(input(f"Nome do funcionário {i+1}: "))
+        salarios.append(float(input(f"Salário de {nomes[-1]}: R$ ")))
+
+    soma = 0
+    idx_maior = 0
+    idx_menor = 0
+
+    for i in range(len(salarios)):
+        soma += salarios[i]
+        if salarios[i] > salarios[idx_maior]: idx_maior = i
+        if salarios[i] < salarios[idx_menor]: idx_menor = i
+
+    media = soma / len(salarios)
+
+    print("\n--- Relatório ---")
+    print(f"Maior salário: {nomes[idx_maior]} (R$ {salarios[idx_maior]:.2f})")
+    print(f"Menor salário: {nomes[idx_menor]} (R$ {salarios[idx_menor]:.2f})")
+    print(f"Média salarial: R$ {media:.2f}")
+    print("Funcionários acima da média:")
+    for i in range(len(salarios)):
+        if salarios[i] > media:
+            print(f"- {nomes[i]} (R$ {salarios[i]:.2f})")
+
+cadastro_funcionarios()
+
+def vetor_invertido():
+    numeros = []
+    for i in range(20):
+        numeros.append(int(input(f"Digite o {i+1}º número: ")))
+
+    inverso = []
+    for i in range(len(numeros) - 1, -1, -1):
+        inverso.append(numeros[i])
+
+    print("\nOrdem original:", numeros)
+    print("Ordem inversa:", inverso)
+
+vetor_invertido()
+
+def sistema_biblioteca():
+    livros = []
+    opcao = 0
+
+    while opcao != 5:
+        print("\n--- BIBLIOTECA ---")
+        print("1. Cadastrar livro\n2. Pesquisar livro\n3. Remover livro\n4. Listar livros\n5. Encerrar")
+        opcao = int(input("Opção: "))
+
+        if opcao == 1:
+            livros.append(input("Nome do livro: "))
+        elif opcao == 2:
+            busca = input("Nome do livro para pesquisa: ")
+            print("Cadastrado!" if busca in livros else "Não encontrado.")
+        elif opcao == 3:
+            busca = input("Nome do livro para remover: ")
+            if busca in livros:
+                livros.remove(busca)
+                print("Removido!")
+            else:
+                print("Livro não encontrado.")
+        elif opcao == 4:
+            print("Livros cadastrados:", livros)
+
+sistema_biblioteca()
+
+def verificar_palindromo():
+    palavra = input("Digite uma palavra: ").strip()
+    palavra_limpa = palavra.lower()
+
+    invertida = ""
+    for i in range(len(palavra_limpa) - 1, -1, -1):
+        invertida += palavra_limpa[i]
+
+    if palavra_limpa == invertida:
+        print(f"'{palavra}' é um palíndromo.")
+    else:
+        print(f"'{palavra}' NÃO é um palíndromo.")
+
+verificar_palindromo()
+
+def eh_primo(num):
+    if num < 2:
+        return False
+    for i in range(2, num):
+        if num % i == 0:
+            return False
+    return True
+
+def intervalo_primos():
+    inicio = int(input("Digite o início do intervalo: "))
+    fim = int(input("Digite o fim do intervalo: "))
+
+    primos = []
+    for num in range(inicio, fim + 1):
+        if eh_primo(num):
+            primos.append(num)
+
+    print(f"Primos entre {inicio} e {fim}: {primos}")
+
+intervalo_primos()
+
+def agenda_telefonica():
+    nomes = []
+    telefones = []
+    opcao = 0
+
+    while opcao != 5:
+        print("\n--- AGENDA ---")
+        print("1. Adicionar contato\n2. Buscar contato\n3. Remover contato\n4. Listar contatos\n5. Sair")
+        opcao = int(input("Opção: "))
+
+        if opcao == 1:
+            nomes.append(input("Nome: "))
+            telefones.append(input("Telefone: "))
+        elif opcao == 2:
+            busca = input("Nome para buscar: ")
+            encontrado = False
+            for i in range(len(nomes)):
+                if nomes[i].lower() == busca.lower():
+                    print(f"Contato: {nomes[i]} - Tel: {telefones[i]}")
+                    encontrado = True
+            if not encontrado: print("Contato não encontrado.")
+        elif opcao == 3:
+            busca = input("Nome para remover: ")
+            if busca in nomes:
+                idx = nomes.index(busca)
+                nomes.pop(idx)
+                telefones.pop(idx)
+                print("Contato removido.")
+            else: print("Contato não encontrado.")
+        elif opcao == 4:
+            for i in range(len(nomes)):
+                print(f"{i+1}. {nomes[i]} - {telefones[i]}")
+
+agenda_telefonica()
+
+def sistema_votacao():
+    votos = [0, 0, 0, 0, 0] # [Cand1, Cand2, Cand3, Branco, Nulo]
+    
+    while True:
+        print("\n1. Candidato 1 | 2. Candidato 2 | 3. Candidato 3 | 4. Branco | 5. Nulo | 0. Encerrar")
+        voto = int(input("Digite seu voto: "))
+        if voto == 0:
+            break
+        elif 1 <= voto <= 5:
+            votos[voto - 1] += 1
+        else:
+            print("Opção inválida!")
+
+    total = sum(votos)
+    if total == 0:
+        print("Nenhum voto registrado.")
+        return
+
+    print("\n--- Resultado da Eleição ---")
+    print(f"Total de votos: {total}")
+    for i in range(3):
+        pct = (votos[i] / total) * 100
+        print(f"Candidato {i+1}: {votos[i]} votos ({pct:.1f}%)")
+    
+    print(f"Brancos: {votos[3]} ({(votos[3]/total)*100:.1f}%)")
+    print(f"Nulos: {votos[4]} ({(votos[4]/total)*100:.1f}%)")
+
+    # Determinar vencedor
+    maior_votos = votos[0]
+    vencedor = "Candidato 1"
+    if votos[1] > maior_votos:
+        maior_votos = votos[1]
+        vencedor = "Candidato 2"
+    if votos[2] > maior_votos:
+        maior_votos = votos[2]
+        vencedor = "Candidato 3"
+
+    print(f"Vencedor: {vencedor}")
+
+sistema_votacao()
+
+def calcular_m(n1, n2):
+    return (n1 + n2) / 2
+
+def sistema_academico():
+    nomes = []
+    notas1 = []
+    notas2 = []
+    medias = []
+    situacoes = []
+    opcao = 0
+
+    while opcao != 7:
+        print("\n--- SISTEMA ACADÊMICO ---")
+        print("1. Cadastrar aluno\n2. Lançar notas\n3. Calcular média\n4. Mostrar boletim")
+        print("5. Mostrar aprovados\n6. Mostrar reprovados\n7. Encerrar")
+        opcao = int(input("Opção: "))
+
+        if opcao == 1:
+            nomes.append(input("Nome do aluno: "))
+            notas1.append(0.0)
+            notas2.append(0.0)
+            medias.append(0.0)
+            situacoes.append("Pendente")
+        elif opcao == 2:
+            nome = input("Nome do aluno para lançar notas: ")
+            if nome in nomes:
+                idx = nomes.index(nome)
+                notas1[idx] = float(input("Nota 1: "))
+                notas2[idx] = float(input("Nota 2: "))
+            else: print("Aluno não encontrado.")
+        elif opcao == 3:
+            for i in range(len(nomes)):
+                medias[i] = calcular_m(notas1[i], notas2[i])
+                situacoes[i] = "Aprovado" if medias[i] >= 7.0 else "Reprovado"
+            print("Médias calculadas com sucesso.")
+        elif opcao == 4:
+            for i in range(len(nomes)):
+                print(f"{nomes[i]} | N1: {notas1[i]} | N2: {notas2[i]} | Média: {medias[i]:.1f} | Situação: {situacoes[i]}")
+        elif opcao == 5:
+            print("--- Aprovados ---")
+            for i in range(len(nomes)):
+                if situacoes[i] == "Aprovado": print(f"- {nomes[i]}")
+        elif opcao == 6:
+            print("--- Reprovados ---")
+            for i in range(len(nomes)):
+                if situacoes[i] == "Reprovado": print(f"- {nomes[i]}")
+
+sistema_academico()
+
+def estoque():
+    nomes = []
+    quantidades = []
+    precos = []
+    opcao = 0
+
+    while opcao != 8:
+        print("\n--- GERENCIAMENTO DE ESTOQUE ---")
+        print("1. Cadastrar produto\n2. Listar produtos\n3. Atualizar quantidade")
+        print("4. Buscar produto\n5. Remover produto\n6. Mostrar produto mais caro")
+        print("7. Mostrar valor total do estoque\n8. Encerrar")
+        opcao = int(input("Escolha uma opção: "))
+
+        if opcao == 1:
+            nomes.append(input("Nome do produto: "))
+            quantidades.append(int(input("Quantidade: ")))
+            precos.append(float(input("Preço unitário: R$ ")))
+        elif opcao == 2:
+            for i in range(len(nomes)):
+                print(f"{nomes[i]} - Qtd: {quantidades[i]} - Preço: R$ {precos[i]:.2f}")
+        elif opcao == 3:
+            nome = input("Produto a atualizar: ")
+            if nome in nomes:
+                idx = nomes.index(nome)
+                quantidades[idx] = int(input("Nova quantidade: "))
+            else: print("Produto não encontrado.")
+        elif opcao == 4:
+            nome = input("Buscar produto: ")
+            if nome in nomes:
+                idx = nomes.index(nome)
+                print(f"Achado: {nomes[idx]} | Qtd: {quantidades[idx]} | Preço: R$ {precos[idx]:.2f}")
+            else: print("Produto não encontrado.")
+        elif opcao == 5:
+            nome = input("Produto a remover: ")
+            if nome in nomes:
+                idx = nomes.index(nome)
+                nomes.pop(idx)
+                quantidades.pop(idx)
+                precos.pop(idx)
+                print("Removido com sucesso.")
+            else: print("Produto não encontrado.")
+        elif opcao == 6:
+            if precos:
+                idx_caro = 0
+                for i in range(len(precos)):
+                    if precos[i] > precos[idx_caro]: idx_caro = i
+                print(f"Mais caro: {nomes[idx_caro]} (R$ {precos[idx_caro]:.2f})")
+            else: print("Estoque vazio.")
+        elif opcao == 7:
+            total = 0
+            for i in range(len(nomes)):
+                total += quantidades[i] * precos[i]
+            print(f"Valor total em estoque: R$ {total:.2f}")
+
+estoque()
